@@ -37,11 +37,9 @@ body {
       transition: height 0.3s;
       background: rgba(0, 0, 0, 0.5);
       cursor: ew-resize; }
-    body #videoPlayer .progressBar {
-      width: 50%;
+    body #videoPlayer #progressBar {
       background: #ffc600;
-      flex: 0;
-      flex-basis: 50%; }
+      opacity: .2; }
     body #videoPlayer #playerControls {
       display: flex;
       box-sizing: border-box;

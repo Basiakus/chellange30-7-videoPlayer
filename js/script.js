@@ -40,6 +40,7 @@ function progressHandle() {
 function scrub(e) {
 	const scrubTime = (e.offsetX / progressBox.offsetWidth) * movieClip.duration;
 	movieClip.currentTime = scrubTime;
+	console.log(scrubTime);
 }
 function fullscreen() {
 	console.log('full');
