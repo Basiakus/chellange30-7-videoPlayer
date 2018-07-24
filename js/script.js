@@ -43,7 +43,8 @@ function scrub(e) {
 }
 function fullscreen() {
 	console.log('full');
-	this.classList.toggle("fullscreen");
+	const videoPlayer = document.getElementById('videoPlayer');
+	videoPlayer.classList.toggle("fullscreen");
 }
 
 playButton.addEventListener('click', playAndPause);

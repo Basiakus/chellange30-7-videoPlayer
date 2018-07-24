@@ -13,10 +13,8 @@ body {
   background-color: black;
   background-repeat: no-repeat;
   background-position: center top;
-  background-size: 100% auto; }
+  background-size: 50% auto; }
   body #videoPlayer {
-    margin-top: 20%;
-    margin-bottom: 10%;
     width: 50%;
     border: 5px solid rgba(155, 155, 155, 0.2);
     box-shadow: 0 0 20px rgba(155, 155, 155, 0.2);
@@ -73,17 +71,17 @@ body {
         width: 10px;
         height: 30px; }
 
-.fullscreen body #videoPlayer {
-  margin: 0;
-  width: 100%;
-  font-size: 0;
-  overflow: hidden; }
+.fullscreen {
+  min-width: 100vw;
+  height: 100vh; }
 
+@media only screen and (max-width: 800px) {
+  body #videoPlayer {
+    width: 70%;
+    margin: 0; } }
 @media only screen and (max-width: 500px) {
-  body {
-    background-image: none; }
-    body #videoPlayer {
-      width: 90%;
-      margin: 0; } }
+  body #videoPlayer {
+    width: 90%;
+    margin: 0; } }
 
 /*# sourceMappingURL=style.css.map */
