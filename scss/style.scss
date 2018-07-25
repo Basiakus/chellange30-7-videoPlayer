@@ -130,6 +130,9 @@ body {
         #videoPlayer {
 	  		width: 90%;
 	  		margin: 0;
+	  		.playerButtons {
+	  			font-size: 10px;
+	  		}
 	  	}
     }
 }
