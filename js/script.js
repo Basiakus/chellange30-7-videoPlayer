@@ -70,6 +70,8 @@ ranges.forEach( range => range.addEventListener('mousemove', rangeValueHandler))
 movieClip.addEventListener('timeupdate', progressHandle);
 progressBox.addEventListener('click', scrub);
 fullscreenButton.addEventListener('click', fullscreen);
-
+window.addEventListener('keyup', function(e) {
+	if (e.keyCode) playAndPause();
+});
 
 
