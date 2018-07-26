@@ -7,13 +7,13 @@ const progressBox = document.getElementById('progressBox');
 const fullscreenButton = document.getElementById('fullscreenButton');
 
 
-let isPlaying = false;
+//let isPlaying = false;
 let isCliked = false;
 
 
 function playAndPause() {
-	isPlaying = !isPlaying;
-	if(isPlaying) {
+	//isPlaying = !isPlaying;
+	if(movieClip.paused) {
 		movieClip.play();
 		//console.log('play');
 		playButton.innerHTML = "&#9658";
@@ -24,11 +24,11 @@ function playAndPause() {
 	};
 }
 function skipVideo() {
-	//console.log(this.dataset.skip);
+	console.log(this.dataset.skip);
 	movieClip.currentTime += parseFloat(this.dataset.skip);
 }
 function rangeValueHandler() {
-	console.log(isCliked);
+	//console.log(isCliked);
 	if(!isCliked) return;
 	movieClip[this.name] = this.value;
 }
@@ -45,6 +45,7 @@ function fullscreen() {
 	console.log('full');
 	const videoPlayer = document.getElementById('videoPlayer');
 	videoPlayer.classList.toggle("fullscreen");
+	document.body.classList.toggle("fullscreen");
 }
 
 
@@ -53,9 +54,10 @@ skipButtons.forEach( button => button.addEventListener('click', skipVideo));
 movieClip.addEventListener('timeupdate', progressHandle);
 progressBox.addEventListener('click', scrub);
 fullscreenButton.addEventListener('click', fullscreen);
-window.addEventListener('keyup', function(e) {
+document.body.addEventListener('keyup', function(e) {
 	console.log(e.keyCode);
-	if (e.keyCode === 32) {
+	e.preventDefault();
+	if (e.keyCode == 32) {
 		playAndPause();
 	} else {
 		return;
