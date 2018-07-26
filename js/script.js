@@ -6,12 +6,13 @@ const progressBar = document.getElementById('progressBar');
 const progressBox = document.getElementById('progressBox');
 const fullscreenButton = document.getElementById('fullscreenButton');
 
+
 let isPlaying = false;
 let isCliked = false;
 
+
 function playAndPause() {
 	isPlaying = !isPlaying;
-	//console.log(isPlaying)
 	if(isPlaying) {
 		movieClip.play();
 		//console.log('play');
@@ -22,14 +23,12 @@ function playAndPause() {
 		playButton.innerHTML = "&#10074&#10074";
 	};
 }
-
-
 function skipVideo() {
 	//console.log(this.dataset.skip);
 	movieClip.currentTime += parseFloat(this.dataset.skip);
 }
 function rangeValueHandler() {
-	//console.log(isCliked);
+	console.log(isCliked);
 	if(!isCliked) return;
 	movieClip[this.name] = this.value;
 }
@@ -40,7 +39,7 @@ function progressHandle() {
 function scrub(e) {
 	const scrubTime = (e.offsetX / progressBox.offsetWidth) * movieClip.duration;
 	movieClip.currentTime = scrubTime;
-	console.log(scrubTime);
+	//console.log(scrubTime);
 }
 function fullscreen() {
 	console.log('full');
@@ -48,14 +47,24 @@ function fullscreen() {
 	videoPlayer.classList.toggle("fullscreen");
 }
 
-playButton.addEventListener('click', playAndPause);
 
+playButton.addEventListener('click', playAndPause);
 skipButtons.forEach( button => button.addEventListener('click', skipVideo));
 
+
+ranges.forEach( range => range.addEventListener('click', function() {
+	isCliked = true;
+	rangeValueHandler();
+}));
 ranges.forEach( range => range.addEventListener('mousedown', function() {
 	isCliked = true;
 	rangeValueHandler();
 }));
+ranges.forEach( range => range.addEventListener('touchstart', function() {
+	isCliked = true;
+	rangeValueHandler();
+}));
+
 
 ranges.forEach( range => range.addEventListener('mouseup', function() {
 	isCliked = false;
@@ -64,12 +73,27 @@ ranges.forEach( range => range.addEventListener('mouseup', function() {
 		movieClip.playbackRate = this.value;
 	}
 }));
+ranges.forEach( range => range.addEventListener('touchend', function() {
+	isCliked = false;
+	if(this.name === 'playbackRate') {
+		this.value = 1;
+		movieClip.playbackRate = this.value;
+	}
+}));
+
+
 
 ranges.forEach( range => range.addEventListener('mousemove', rangeValueHandler));
+ranges.forEach( range => range.addEventListener('touchmove', rangeValueHandler));
+
+
 
 movieClip.addEventListener('timeupdate', progressHandle);
+
 progressBox.addEventListener('click', scrub);
+
 fullscreenButton.addEventListener('click', fullscreen);
+
 window.addEventListener('keyup', function(e) {
 	console.log(e.keyCode);
 	if (e.keyCode === 32) playAndPause();
