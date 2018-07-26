@@ -1,5 +1,5 @@
 const movieClip = document.getElementById('movieClip');
-const playButton = document.querySelectorAll('button.playerButtons')[0];
+const playButton = document.getElementById('play');
 const skipButtons = document.querySelectorAll('[data-skip]');
 const ranges = document.querySelectorAll('input[name]');
 const progressBar = document.getElementById('progressBar');
@@ -50,6 +50,17 @@ function fullscreen() {
 
 playButton.addEventListener('click', playAndPause);
 skipButtons.forEach( button => button.addEventListener('click', skipVideo));
+movieClip.addEventListener('timeupdate', progressHandle);
+progressBox.addEventListener('click', scrub);
+fullscreenButton.addEventListener('click', fullscreen);
+window.addEventListener('keyup', function(e) {
+	console.log(e.keyCode);
+	if (e.keyCode === 32) {
+		playAndPause();
+	} else {
+		return;
+	}
+});
 
 
 ranges.forEach( range => range.addEventListener('click', function() {
@@ -88,15 +99,10 @@ ranges.forEach( range => range.addEventListener('touchmove', rangeValueHandler))
 
 
 
-movieClip.addEventListener('timeupdate', progressHandle);
 
-progressBox.addEventListener('click', scrub);
 
-fullscreenButton.addEventListener('click', fullscreen);
 
-window.addEventListener('keyup', function(e) {
-	console.log(e.keyCode);
-	if (e.keyCode === 32) playAndPause();
-});
+
+
 
 
